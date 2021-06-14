@@ -14,7 +14,7 @@ def color_producer(elevation):
     if(elevation>0 and elevation<=1500):
         return "red"
     elif(elevation>1500 and elevation<=3000):
-        return "green"
+        return "orange"
     else:
         return "blue"
 
@@ -22,6 +22,6 @@ def color_producer(elevation):
 map = folium.Map(location=[38.58, -99.09],zoom_start=5,tiles = "Stamen Terrain")
 fg=folium.FeatureGroup(name="My Map")#Feature Group
 for lt,ln,nm,elv in zip(lat,lon,name,elev):
-    fg.add_child(folium.Marker(location=[lt,ln],popup=nm+" "+str(elv)+" m",icon=folium.Icon(color_producer(elv))))
+    fg.add_child(folium.CircleMarker(location=[lt,ln],radius=6,popup=nm+" "+str(elv)+" m",fill_color=color_producer(elv),color="grey",fill_opacity=0.9))
 map.add_child(fg)
 map.save("Map1.html")
